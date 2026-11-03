@@ -1,0 +1,6 @@
+{
+  "appId": "com.arabicpoet.app",
+  "appName": "منسق الشعر العربي",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
