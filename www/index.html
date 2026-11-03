@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f3ec">
+  <title>منسق الشعر العربي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Scheherazade+New&family=Noto+Naskh+Arabic&family=Lateef&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>منسّق الشعر العربي</h1>
+  <p>موازنة الأشطر بالتطويل الذكي وتوزيع المسافات، مع أعمدة ثابتة — يعمل محليًا في المتصفح</p>
+</header>
+
+<div class="bar">
+  <button class="p" id="bpdf">تنزيل PDF</button>
+  <button id="bword">Word</button>
+  <button id="bpng">صورة PNG</button>
+  <button id="bcopy">نسخ النص</button>
+  <button id="bprint">طباعة</button>
+  <div class="tabs">
+    <button id="tedit">تحرير</button>
+    <button id="tview" class="on">معاينة</button>
+  </div>
+</div>
+
+<main data-v="view">
+
+<section class="panel" id="ctl">
+
+<label for="src">القصيدة (بيت في كل سطر، وفاصل بين الشطرين؛ سطر فارغ = فاصل مقطع)</label>
+
+<textarea id="src" spellcheck="false"></textarea>
+
+<div class="btns">
+  <button id="sample">قصيدة تجريبية</button>
+  <button id="strip">إزالة التشكيل</button>
+  <button id="punc">إزالة علامات الترقيم</button>
+  <button id="reset">إعادة الضبط</button>
+</div>
+
+<div class="r2">
+  <div>
+    <label for="sep">فاصل الشطرين</label>
+    <input type="text" id="sep" value="|" maxlength="3">
+  </div>
+
+  <div>
+    <label for="font">الخط</label>
+    <select id="font">
+      <option value='"Amiri","Traditional Arabic",serif'>أميري</option>
+      <option value='"Scheherazade New","Traditional Arabic",serif'>شهرزاد</option>
+      <option value='"Noto Naskh Arabic","Traditional Arabic",serif'>نوتو نسخ</option>
+      <option value='"Lateef","Traditional Arabic",serif'>لطيف</option>
+      <option value='"Traditional Arabic","Arabic Typesetting",serif'>Traditional Arabic</option>
+      <option value='Tahoma,"Segoe UI",sans-serif'>Tahoma</option>
+    </select>
+  </div>
+</div>
+
+<label for="method">طريقة الموازنة</label>
+<select id="method">
+  <option value="smart">التطويل الذكي</option>
+  <option value="space">توزيع المسافات</option>
+  <option value="mixed" selected>الموازنة المختلطة</option>
+</select>
+
+<label for="num">ترقيم الأبيات (على اليمين)</label>
+<select id="num">
+  <option value="none">بدون ترقيم</option>
+  <option value="ar">١ ٢ ٣ …</option>
+  <option value="en">1 2 3 …</option>
+</select>
+
+<label for="numf">شكل الرقم</label>
+<select id="numf">
+  <option value="{n}">1</option>
+  <option value="{n}-">1-</option>
+  <option value="({n})">(1)</option>
+  <option value="{n}.">1.</option>
+  <option value="[{n}]">[1]</option>
+  <option value="-{n}-">-1-</option>
+  <option value="﴿{n}﴾">﴿1﴾</option>
+</select>
+
+<label for="sym">رمز الفصل بين الشطرين</label>
+<select id="sym">
+  <option value="">بدون رمز</option>
+  <option>۞</option>
+  <option>✦</option>
+  <option>❁</option>
+  <option>❖</option>
+  <option>◆</option>
+  <option>•</option>
+  <option>٭</option>
+  <option>۩</option>
+  <option>⁂</option>
+  <option value="*custom">مخصص…</option>
+</select>
+
+<input type="text" id="symc" placeholder="اكتب الرمز" maxlength="4" style="display:none;margin-top:6px">
+
+<label for="theme">ألوان جاهزة</label>
+<select id="theme">
+  <option value="">—</option>
+  <option value="#fffaf0,#241a10">ورق عاجي</option>
+  <option value="#ffffff,#111111">أبيض</option>
+  <option value="#f1ebe0,#3b2a1a">رَقّ قديم</option>
+  <option value="#e9eef0,#1d2b33">رمادي مزرق</option>
+  <option value="#1c1a17,#f0e6d2">ليلي</option>
+  <option value="#0f3d33,#f3e6bf">زيتي وذهبي</option>
+</select>
+
+<div class="r2">
+  <div>
+    <label for="bg">لون الصفحة</label>
+    <input type="color" id="bg" value="#fffaf0">
+  </div>
+  <div>
+    <label for="ink">لون الخط</label>
+    <input type="color" id="ink" value="#241a10">
+  </div>
+</div>
+
+<label>مقدار التطويل <span class="val" id="kv"></span></label>
+<input type="range" id="kash" min="0" max="100" value="60">
+
+<label>حجم الخط (px) <span class="val" id="sv"></span></label>
+<input type="range" id="size" min="16" max="56" value="30">
+
+<label>المسافة بين الشطرين (px) <span class="val" id="gv"></span></label>
+<input type="range" id="gap" min="10" max="160" value="70">
+
+<label>المسافة بين الأبيات (px) <span class="val" id="bv"></span></label>
+<input type="range" id="bgap" min="0" max="60" value="14">
+
+<div id="stats"></div>
+
+</section>
+
+<section class="panel stage">
+  <div class="sheet" id="sheet">
+    <div class="frame" id="frame">
+      <div class="poem" id="poem"></div>
+    </div>
+  </div>
+
+  <p class="note">
+    ملف PDF المنزَّل صفحات A4 بصور عالية الدقة؛
+    زر الطباعة يعطي نصاً متجهياً.
+  </p>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
